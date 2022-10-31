@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+    char way[10];
+    int n,i,j;
+    gets(way);
+    scanf("%d",&n);
+    char str[n][1000],temp[1000],strnew[n][1000],tap;
+    tap=getchar();
+    for(i=0;i<n;i++)
+    {
+        gets(str[i]);
+        strcpy(strnew[i],str[i]);
+    }
+    if(way[0]=='i')
+    {
+        for(i=0;i<n-1;i++)
+          for(j=0;j<n-1-i;j++)
+            if(strcmp(str[j],str[j+1])>0)
+            {
+                strcpy(temp,str[j]);
+                strcpy(str[j],str[j+1]);
+                strcpy(str[j+1],temp);
+            }
+    }
+    else if(way[0]=='d')
+    {
+        for(i=0;i<n-1;i++)
+          for(j=0;j<n-1-i;j++)
+            if(strcmp(str[j],str[j+1])<0)
+            {
+                strcpy(temp,str[j]);
+                strcpy(str[j],str[j+1]);
+                strcpy(str[j+1],temp);
+            }
+    }
+    else if(way[2]=='i')
+    {
+        for(i=0;i<n;i++)
+          for(j=0;j<strlen(strnew[i]);j++)
+            if(strnew[i][j]>90)strnew[i][j]-=32;
+        for(i=0;i<n-1;i++)
+          for(j=0;j<n-1-i;j++)
+            if(strcmp(strnew[j],strnew[j+1])>0)
+            {
+                strcpy(temp,strnew[j]);
+                strcpy(strnew[j],strnew[j+1]);
+                strcpy(strnew[j+1],temp);
+                strcpy(temp,str[j]);
+                strcpy(str[j],str[j+1]);
+                strcpy(str[j+1],temp);
+            }
+    }
+    else
+    {
+        for(i=0;i<n;i++)
+          for(j=0;j<strlen(strnew[i]);j++)
+            if(strnew[i][j]>90)strnew[i][j]-=32;
+        for(i=0;i<n-1;i++)
+          for(j=0;j<n-1-i;j++)
+            if(strcmp(strnew[j],strnew[j+1])<0)
+            {
+                strcpy(temp,strnew[j]);
+                strcpy(strnew[j],strnew[j+1]);
+                strcpy(strnew[j+1],temp);
+                strcpy(temp,str[j]);
+                strcpy(str[j],str[j+1]);
+                strcpy(str[j+1],temp);
+            }
+    }
+    for(i=0;i<n;i++)
+        puts(str[i]);
+}
